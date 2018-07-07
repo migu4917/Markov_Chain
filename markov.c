@@ -32,6 +32,7 @@ double rrand() {
     seed = fmod(lambda * seed, m);
     return seed / m;
 }
+
 unsigned int hash(char *s[]) {
     unsigned int h = 0;
     char *p;
@@ -41,6 +42,7 @@ unsigned int hash(char *s[]) {
         h = 131 * h + *p;
     return h % HASHSIZE;
 }
+
 HashNode * FindPrefix(char *prefix[]) {
     int value = hash(prefix);
     HashNode * sp = ListHash[value];
@@ -54,6 +56,7 @@ HashNode * FindPrefix(char *prefix[]) {
     ListHash[value] = sp;
     return sp;
 }
+
 void add(char *prefix[], char *suffix) {
     HashNode * sp = FindPrefix(prefix);
     ++sp->nsuf;
@@ -66,6 +69,7 @@ void add(char *prefix[], char *suffix) {
     prefix[0] = prefix[1];
     prefix[1] = suffix;
 }
+
 void Produce(int maxn, FILE * outfp) {
     char *prefix[2] = { "\0", "\0"}, *w;
     unsigned int j;
@@ -87,6 +91,7 @@ void Produce(int maxn, FILE * outfp) {
         prefix[1] = w;
     }
 }
+
 int main() {
     char *prefix[2] = { "\0", "\0"}, buf[200];
     FILE * infp, * outfp;
